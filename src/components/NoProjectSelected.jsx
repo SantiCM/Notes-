@@ -1,11 +1,16 @@
 import noProjectImage from "../assets/no-projects.png"
 import { Button } from "./Button"
 
+// no esta seleccionado el proyecto
+// recibimos el empezando el proyecto
+
 export const NoProjectSelected = ( { onStartAddProject } ) => {
     
     return (
         
         <div className="mt-2 text-center w-2/3">
+
+            { /* Mandamos la imagen */ }
 
             <img src={noProjectImage} alt="An empy task" className="w-16 h-16 object-contain mx-auto"></img>
 
@@ -15,6 +20,8 @@ export const NoProjectSelected = ( { onStartAddProject } ) => {
 
             <p className="mt-8">
                 
+                { /* Mandamos el Button personalizado que al hacerle click le damos que inicie un nuevo proyecto */ }
+
                 <Button onClick={onStartAddProject}>Create New Project</Button>
 
             </p>

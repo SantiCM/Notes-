@@ -2,49 +2,64 @@ import { useRef } from "react";
 import Input from "../components/Input";
 import Modal from "./Modal";
 
+// variable para hacer un nuevo proyecto
+// recibe el add y el cancel
 export const NewProject = ({ onAdd, onCancel }) => {
 
+  // damos el ref del modal
   const modal = useRef()
-    
+
+  // en las siguientes 3 variables damos el ref
+  // para el titulo, la descripcion y la fecha
   const titleRef = useRef();
 
   const description = useRef();
 
   const dueDate = useRef();
 
-    const handleSave = () => {
-    
-        const enteredTitle = titleRef.current.value;
+  // variable guardar la nota
 
-        const enteredDescription = description.current.value;
+  const handleSave = () => {
 
-        const enteredDueDate = dueDate.current.value;
+    // damos la referencia de cada uno de los campos de esta manera
+    const enteredTitle = titleRef.current.value;
 
-        // validacion
+    const enteredDescription = description.current.value;
 
-        if ( enteredTitle.trim() === "" || enteredDescription.trim === "" || enteredDueDate.trim() === "" ) {
+    const enteredDueDate = dueDate.current.value;
 
-            modal.current.open()
-            
-            return;
-    
-        }
+    // validacion
 
-        onAdd({
+    // si el titulo, la descripcion y la date son iguales a ""
+    if ( enteredTitle.trim() === "" || enteredDescription.trim === "" || enteredDueDate.trim() === "" ) {
+
+      // mandamos el modal
+      modal.current.open()
       
-            titleRef: enteredTitle,
-
-            description: enteredDescription,
-
-            dueDate: enteredDueDate,
+      // return necesario
+      return;
     
-        });
+    }
+
+    // save
+    onAdd({
+      
+      // hacemos que las entradas tengan sus nuevos valores
+      titleRef: enteredTitle,
+
+      description: enteredDescription,
+
+      dueDate: enteredDueDate,
+    
+    });
   
-    };
+  };
 
   return (
 
     <>
+
+      { /*Mandamos el modal con la rederencia y el boton sera OK*/ }
 
       <Modal ref={modal} buttonCaption="OK">
 
@@ -61,7 +76,9 @@ export const NewProject = ({ onAdd, onCancel }) => {
         <menu className="flex items-center justify-end gap-4 my-4">
       
           <li>
-      
+
+            { /* El boton que al hacer click, cancela el proyecto */ }
+
             <button className="bg-red-500 px-6 py-2 rounded-md text-stone-100" onClick={onCancel}>
       
               Cancel
@@ -75,9 +92,11 @@ export const NewProject = ({ onAdd, onCancel }) => {
       
             <button
       
-                className="bg-stone-800 text-stone-50 hover:bg-stone-950 px-6 py-2 rounded-md"
+              className="bg-stone-800 text-stone-50 hover:bg-stone-950 px-6 py-2 rounded-md"
               
-                onClick={handleSave}
+              // al hacer click lo guardamos
+
+              onClick={handleSave}
             
             >
             
@@ -90,7 +109,9 @@ export const NewProject = ({ onAdd, onCancel }) => {
         </menu>
 
         <div>
-        
+
+          { /* Mandamos el componente del Input con su respectiva referencia y su label que sera que es cada entrada */ }
+
           <Input type="text" ref={titleRef} label="Title"></Input>
 
           <Input ref={description} label="Description"></Input>
