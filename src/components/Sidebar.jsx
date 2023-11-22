@@ -1,6 +1,7 @@
 import { Button } from "./Button"
 
-export const Sidebar = ({onStartAddProject, projects}) => {
+export const Sidebar = ({onStartAddProject, projects, onSelectProject, selectedProjectId}) => {
+
 
     return (
 
@@ -18,25 +19,41 @@ export const Sidebar = ({onStartAddProject, projects}) => {
 
                 {
                 
-                    projects.map((project) => (
+                    projects.map((project) => {
 
-                        <li key={project.id}>
+                        let cssClasses = "w-full text-left px-2 py-1 rounded-sm my-1 hover:text-stone-200 hover:bg-stone-800"
 
-                            <button 
+                        if(project.id === selectedProjectId) {
+                        
+                            cssClasses += "bg-stone-800 text-stone-200"
+                        
+                        } else {
+                        
+                            cssClasses += "text-stone-400"
+                        
+                        }
+                    
+                        return (
+
+                            <li key={project.id}>
+
+                                <button 
                                 
-                                className="w-full text-left px-2 py-1 rounded-sm my-1 text-stone-400 hover:text-stone-200 hover:bg-stone-800"
+                                    onClick={() => onSelectProject(project.id)}
+
+                                    className={cssClasses}
                             
-                            >
-                                {project.title}
+                                >
+                                    {project.title}
                                 
-                            </button>
+                                </button>
 
-                        </li>
-                    
-                    
-                    ))
-                
-                }
+                            </li>
+                                   
+                        )
+
+                    }
+                )}
 
             </ul>
 
